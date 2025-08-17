@@ -1,0 +1,18 @@
+{%- set absolutePageUrl -%}{{ page.url | url | absoluteUrl(env.url) }}{%- endset -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="/dist/assets/styles/index.css" as="style">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ pageTitle or title }} - {{ site.title }}</title>
+<meta name="description" content="{{ description or site.description }}">
+<meta name="author" content="{{ site.author }}">
+<meta name="robots" content="index,follow">
+<!-- Social Metadata -->
+<meta property="og:site_name" content="{{ site.author }}">
+<meta property="og:title" content="{{ title or site.title }} - {{ site.title }}">
+<meta property="og:description" content="{{ description or site.description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ absolutePageUrl }}">
+<meta property="og:image" content="{{ site.image | url | absoluteUrl(env.url) }}">
+<meta name="theme-color" content="#ffffff">
+{% favicons './src/static/img/logo.png' %}
