@@ -16,8 +16,13 @@ export default function (eleventyConfig) {
         }
         return url.replace(/\/+$/, ''); // Remove one or more trailing slashes
     });
+
     //compile tailwind before eleventy processes the files
-    eleventyConfig.addPlugin(faviconsPlugin, {}); // Optional: add configuration options here
+    eleventyConfig.addPlugin(faviconsPlugin,
+        {'outputDir': 'dist',
+                'manifestData': {'name': 'scavino.org'}
+                }
+    ); // Optional: add configuration options here
     eleventyConfig.addPlugin(feedPlugin, {
         type: "atom", // or "rss", "json"
         outputPath: "/feed.xml",
@@ -69,6 +74,8 @@ export default function (eleventyConfig) {
 
 
     return {
-        dir: { input: 'src', output: 'dist' },
+        dir: {
+            input: 'src',
+            output: 'dist' },
     };
 }
