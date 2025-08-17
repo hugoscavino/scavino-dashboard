@@ -1,28 +1,27 @@
-import fs from 'fs';
-import path from 'path';
-
-import cssnano from 'cssnano';
-import postcss from 'postcss';
-import tailwindcss from '@tailwindcss/postcss';
 import faviconsPlugin from 'eleventy-plugin-gen-favicons';
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+import {RenderPlugin} from "@11ty/eleventy";
 
-
+const removeTrailingSlash = (url) => {
+    if (typeof url !== 'string') {
+        throw new Error(`${removeTrailingSlash.name}: expected argument of type string but instead got ${url} (${typeof url})`);
+    }
+    return url.replace(/\/$/, '');
+}
 export default function (eleventyConfig) {
 
-    eleventyConfig.addFilter("removeTrailingSlash", function(url) {
-        if (typeof url !== 'string') {
-            return url; // Return as is if not a string
-        }
-        return url.replace(/\/+$/, ''); // Remove one or more trailing slashes
-    });
+    eleventyConfig.addFilter("removeTrailingSlash", removeTrailingSlash);
 
     //compile tailwind before eleventy processes the files
     eleventyConfig.addPlugin(faviconsPlugin,
         {'outputDir': 'dist',
                 'manifestData': {'name': 'scavino.org'}
                 }
-    ); // Optional: add configuration options here
+    );
+
+    eleventyConfig.addPlugin(RenderPlugin);
+
+    // Optional: add configuration options here
     eleventyConfig.addPlugin(feedPlugin, {
         type: "atom", // or "rss", "json"
         outputPath: "/feed.xml",
@@ -42,40 +41,18 @@ export default function (eleventyConfig) {
         }
     });
 
-    eleventyConfig.on('eleventy.before', async () => {
-        const tailwindInputPath = path.resolve('./src/assets/styles/index.css');
-        const tailwindOutputPath = '/assets/styles/index.css';
-        const cssContent = fs.readFileSync(tailwindInputPath, 'utf8');
-
-
-        const outputDir = path.dirname(tailwindOutputPath);
-        if (!fs.existsSync(outputDir)) {
-            fs.mkdirSync(outputDir, { recursive: true });
-        }
-
-        const result = await processor.process(cssContent, {
-            from: tailwindInputPath,
-            to: tailwindOutputPath,
-        });
-
-        fs.writeFileSync(tailwindOutputPath, result.css);
-    });
-
-    const processor = postcss([
-        //compile tailwind
-        tailwindcss(),
-
-        //minify tailwind css
-        cssnano({
-            preset: 'default',
-        }),
-    ]);
-
-
+    // Passthroughs
+    eleventyConfig.addPassthroughCopy({ './src/static/': '/' });
 
     return {
         dir: {
-            input: 'src',
-            output: 'dist' },
+            input: "src",
+            output: "dist",
+            includes: "_includes",
+            data: "data",
+        },
+        templateFormats: ["html", "njk", "md", "11ty.js"],
+        htmlTemplateEngine: "njk",
+        markdownTemplateEngine: "njk",
     };
 }
