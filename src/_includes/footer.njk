@@ -1,29 +1,69 @@
-<footer class="relative flex flex-col w-full py-10 text-lg sm:flex-row sm:justify-center">
-  <div class="px-8 py-4 text-center">
-    <ul class="list-none">
-      <li>
-        <a class="no-underline hover:text-customRed"
-          href="{% if isFront %}#about{% else %}{{ env.url }}/#about{% endif %}">About</a>
-      </li>
-      <li>
-        <a class="no-underline hover:text-customRed" href="/credits">Credits</a>
-      </li>
-    </ul>
-  </div>
-  <div class="w-1/2 h-px mx-auto bg-customRed sm:h-auto sm:w-px sm:mx-0"></div>
-  <div class="py-4 pl-0 text-center sm:pl-8">
-    <ul class="list-none">
-      {% for item in site.social %}
-      <li>
-        <a class="no-underline hover:text-customRed" href="{{ item.url }}" target="_blank" rel="_noopener">{{ item.title
-          }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+<footer class="bg-body-tertiary text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0 ">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+            <!-- Facebook -->
+            <a
+                    data-mdb-ripple-init class="btn text-white btn-floating m-1"
+                    style="background-color: #3b5998;"
+                    href="#!"
+                    role="button"
+            ><i class="fab fa-facebook-f"></i
+                ></a>
+
+            <!-- Twitter -->
+            <a
+                    data-mdb-ripple-init class="btn text-white btn-floating m-1 social-icons"
+                    style="background-color: #55acee;"
+                    href="#!"
+                    role="button"
+            ><i class="fab fa-twitter"></i
+                ></a>
+
+            <!-- Google -->
+            <a
+                    data-mdb-ripple-init class="btn text-white btn-floating m-1 social-icons"
+                    style="background-color: #dd4b39;"
+                    href="#!"
+                    role="button"
+            ><i class="fab fa-google"></i
+                ></a>
+
+            <!-- Instagram -->
+            <a
+                    data-mdb-ripple-init class="btn text-white btn-floating m-1"
+                    style="background-color: #ac2bac;"
+                    href="#!"
+                    role="button"
+            ><i class="fab fa-instagram"></i
+                ></a>
+
+            <!-- Linkedin -->
+            <a
+                    data-mdb-ripple-init class="btn text-white btn-floating m-1"
+                    style="background-color: #0082ca;"
+                    href="#!"
+                    role="button"
+            ><i class="fab fa-linkedin-in"></i
+                ></a>
+            <!-- Github -->
+            <a
+                    data-mdb-ripple-init class="btn text-white btn-floating m-1"
+                    style="background-color: #333333;"
+                    href="#!"
+                    role="button"
+            ><i class="fab fa-github"></i
+                ></a>
+        </section>
+        <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2025 Copyright:
+        <a class="text-white" href="https://www.scavino.org/">scavino.org</a>
+    </div>
+    <!-- Copyright -->
 </footer>
-<div class="w-full bg-white">
-  <span class="block pb-5 text-sm font-light text-center">
-    &copy; {{ site.author }}, <span x-data x-text="new Date().getFullYear()"></span>
-  </span>
-</div>

@@ -1,8 +1,10 @@
 {%- set absolutePageUrl -%}{{ page.url | url | absoluteUrl(env.url) }}{%- endset -%}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/bootstrap.css" as="style">
+<link rel="stylesheet" href="/css/custom.css" as="style">
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>{{ pageTitle or title }} - {{ site.title }}</title>
 <meta name="description" content="{{ description or site.description }}">

@@ -1,6 +1,7 @@
 import faviconsPlugin from 'eleventy-plugin-gen-favicons';
 import { feedPlugin } from "@11ty/eleventy-plugin-rss";
 import {RenderPlugin} from "@11ty/eleventy";
+import fontAwesomePlugin from "@11ty/font-awesome";
 
 const removeTrailingSlash = (url) => {
     if (typeof url !== 'string') {
@@ -11,6 +12,10 @@ const removeTrailingSlash = (url) => {
 export default function (eleventyConfig) {
 
     eleventyConfig.addFilter("removeTrailingSlash", removeTrailingSlash);
+    eleventyConfig.addPlugin(fontAwesomePlugin, {
+        transform: false, // disable the Eleventy transform
+    });
+
 
     //compile tailwind before eleventy processes the files
     eleventyConfig.addPlugin(faviconsPlugin,
